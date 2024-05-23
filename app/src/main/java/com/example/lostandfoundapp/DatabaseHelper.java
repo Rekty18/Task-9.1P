@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "LostFound.db";
@@ -26,13 +25,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("DatabaseHelper", "Creating table with new schema");
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, TYPE TEXT, NAME TEXT, PHONE TEXT, DESCRIPTION TEXT, DATE TEXT, LOCATION TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d("DatabaseHelper", "Upgrading database from version " + oldVersion + " to " + newVersion);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -47,17 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_6, date);
         contentValues.put(COL_7, location);
 
-        Log.d("InsertData", "Inserting: Type=" + type + ", Name=" + name + ", Phone=" + phone + ", Description=" + description + ", Date=" + date + ", Location=" + location);
-
         long result = db.insert(TABLE_NAME, null, contentValues);
-        db.close();
-
-        if (result == -1) {
-            Log.e("InsertData", "Failed to insert data");
-        } else {
-            Log.d("InsertData", "Data inserted successfully, row ID: " + result);
-        }
-
         return result != -1;
     }
 
@@ -65,6 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
+
     public boolean deleteItemById(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?", new String[]{id}) > 0;
@@ -72,6 +60,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Integer deleteData(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
+        return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
     }
 }

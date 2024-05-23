@@ -6,12 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.lostandfoundapp.NewAdvertActivity;
-import com.example.lostandfoundapp.R;
-import com.example.lostandfoundapp.ShowItemsActivity;
-
 public class MainActivity extends AppCompatActivity {
-    private Button btnNewAdvert, btnShowItems;
+    private Button btnNewAdvert, btnShowItems, btnShowOnMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnNewAdvert = findViewById(R.id.btnNewAdvert);
         btnShowItems = findViewById(R.id.btnShowItems);
+        btnShowOnMap = findViewById(R.id.btnShowOnMap);
 
         btnNewAdvert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,5 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ShowItemsActivity.class));
             }
         });
+
+        btnShowOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MapActivity.class));
+            }
+        });
     }
 }
+

@@ -37,7 +37,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         }
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -66,6 +65,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
     public Cursor getCursor() {
         return cursor;
     }
@@ -75,3 +75,5 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         return cursor.getCount();
     }
 }
+
+
